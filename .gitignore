@@ -2,6 +2,7 @@
 
 # dependencies
 /pizza-menu/node_modules
+/dev-profile-card/node_modules
 /.pnp
 .pnp.js
 
