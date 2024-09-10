@@ -7,11 +7,17 @@ const initialItems = [
 ];
 
 export default function App() {
+  const [items, setItems] = useState([]);
+
+  function handleAddItems(item) {
+    setItems((items) => [...items, item]);
+  }
+
   return (
     <div className="app">
       <Logo />
-      <Form />
-      <ParkingList />
+      <Form onAddItems={handleAddItems} />
+      <ParkingList items={items} />
       <Stats />
     </div>
   );
@@ -21,7 +27,7 @@ function Logo() {
   return <h1>🚆 Hanyar Kano 🎒</h1>;
 }
 
-function Form() {
+function Form({ onAddItems }) {
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState(1);
 
@@ -29,9 +35,9 @@ function Form() {
     e.preventDefault();
 
     if (!description) return;
-
     const newItem = { description, quantity, packed: false, id: Date.now() };
-    console.log(newItem);
+    onAddItems(newItem);
+
     setDescription("");
     setQuantity(1);
   }
@@ -57,7 +63,6 @@ function Form() {
         placeholder="Item..."
         value={description}
         onChange={(e) => {
-          console.log(e.target.value);
           setDescription(e.target.value);
         }}
       />
@@ -66,11 +71,11 @@ function Form() {
   );
 }
 
-function ParkingList() {
+function ParkingList({ items }) {
   return (
     <div className="list">
       <ul>
-        {initialItems.map((item) => (
+        {items.map((item) => (
           <Item item={item} key={item.id} />
         ))}
       </ul>
