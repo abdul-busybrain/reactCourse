@@ -13,28 +13,35 @@ function Counter() {
   const [count, setCount] = useState(0);
   const [step, setStep] = useState(1);
 
+  function handleReset() {
+    setCount(0);
+    setCount(1);
+  }
+
   const date = new Date("8 September 2024");
   date.setDate(date.getDate() + count);
 
-  function handleMinus() {
-    setCount((c) => c - step);
-  }
-  function handlePlus() {
-    setCount((c) => c + step);
-  }
-
   return (
-    <>
+    <div>
       <div>
-        <button onClick={() => setStep((s) => s - 1)}>-</button>
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value={step}
+          onChange={(e) => setStep(Number(e.target.value))}
+        />
         <span>Step: {step} </span>
-        <button onClick={() => setStep((s) => s + 1)}>+</button>
       </div>
 
       <div>
-        <button onClick={handleMinus}>-</button>
-        <span>Count: {count < 0 ? `${Math.abs(count)}` : count} </span>
-        <button onClick={handlePlus}>+</button>
+        <button onClick={() => setCount((c) => c - step)}>-</button>
+        <input
+          type="text"
+          value={count}
+          onChange={(e) => setCount(Number(e.target.value))}
+        />
+        <button onClick={() => setCount((c) => c + step)}>+</button>
       </div>
 
       <p>
@@ -47,6 +54,12 @@ function Counter() {
         </span>
         <span> {date.toDateString()}</span>
       </p>
-    </>
+
+      {count !== 0 || step !== 1 ? (
+        <div>
+          <button onClick={handleReset}>Reset</button>
+        </div>
+      ) : null}
+    </div>
   );
 }
