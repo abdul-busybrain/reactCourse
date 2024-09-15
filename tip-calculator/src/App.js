@@ -84,7 +84,7 @@ function BillInput({ bill, onSetBill }) {
   );
 }
 
-function SelectPercentage({ children, data, onSelect, percentage }) {
+function SelectPercentage({ data, percentage, onSelect, children }) {
   return (
     <div>
       <label> {children}</label>
