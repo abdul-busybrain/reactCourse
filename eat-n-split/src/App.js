@@ -36,8 +36,13 @@ function Button({ children, onClick }) {
 }
 
 export default function App() {
+  // NOTE Managing Array of Objects
   const [family, setFamily] = useState(initialList);
+
+  // NOTE Boolean flags
   const [showAddFamily, setShowAddFamily] = useState(false);
+
+  // NOTE Selected values
   const [selectedFamily, setSelectedFamily] = useState(null);
 
   function handleShowAddFamily() {
@@ -50,13 +55,14 @@ export default function App() {
   }
 
   function handleSelection(family) {
-    // setSelectedFamily(family);
+    // NOTE setSelectedFamily(family);
     setSelectedFamily((selected) =>
       selected?.id === family.id ? null : family
     );
     setShowAddFamily(false);
   }
 
+  // This function update Array items based on conditions
   function handleSplitBill(value) {
     setFamily((family) =>
       family.map((fam) =>
