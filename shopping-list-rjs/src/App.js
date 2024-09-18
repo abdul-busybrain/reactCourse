@@ -37,6 +37,7 @@ export default function App() {
 
   // NOTE Boolean flags
   const [showAddItem, setShowAddItem] = useState(false);
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
 
   function handleAddItem(newItem) {
     setItems((prevItems) => [...prevItems, newItem]);
@@ -48,17 +49,33 @@ export default function App() {
     setShowAddItem((show) => !show);
   }
 
+  function handleShowPaymentForm() {
+    setShowPaymentForm((show) => !show);
+  }
+
   return (
     <div className="app">
-      <ShoppingItems items={items} />
+      <div className="main-content">
+        <div className="shopping-list">
+          <ShoppingItems items={items} />
 
-      {showAddItem && (
-        <FormAddItem onAddItem={(newItem) => handleAddItem(newItem)} />
-      )}
+          {showAddItem && (
+            <FormAddItem onAddItem={(newItem) => handleAddItem(newItem)} />
+          )}
 
-      <Button onClick={handleShowAddItem}>
-        {showAddItem ? "Close" : "Add Item"}
-      </Button>
+          <Button onClick={handleShowAddItem}>
+            {showAddItem ? "Close" : "Add Item"}
+          </Button>
+
+          <Button onClick={handleShowPaymentForm}>Pay</Button>
+        </div>
+
+        {showPaymentForm && (
+          <div className="payment-form">
+            <PaymentForm />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -80,7 +97,9 @@ function Item({ item }) {
     <>
       <li>
         <div className="item">
-          <img src={item.image} alt={item.name} />
+          {(item.image || item.imageURL) && (
+            <img src={item.image || item.imageURL} alt={item.name} />
+          )}
           <div className="item-info">
             <h3>{item.name}</h3>
             <p>
@@ -142,16 +161,39 @@ function FormAddItem({ onAddItem }) {
           placeholder="Ear pod"
         />
 
-        <label>Image</label>
+        <label>Image URL:</label>
         <input
-          type="text"
+          type="url"
           value={image}
           onChange={(e) => setImage(e.target.value)}
         />
       </form>
-      <Button>Submit</Button>
+      <Button onClick={handleSubmit}>Submit</Button>
     </>
   );
 }
 
-function PaymentForm() {}
+function PaymentForm() {
+  return (
+    <>
+      <Button>Pay with wallet</Button>
+      <p>Or pay with card</p>
+      <label>Email:</label>
+      <input type="email" />
+      <label>Card information</label>
+      <input type="text" placeholder="1234 1234 1234 1234" />
+      <input type="date" placeholder="MM / YY" />{" "}
+      <input type="text" placeholder="CVC" />
+      <label>Name on card</label>
+      <input type="text" placeholder="Isa Musa" />
+      <label>Country in Africa</label>
+      <select>
+        <option>Nigeria</option>
+        <option>Niger</option>
+        <option>Benin Republic</option>
+        <option>Egypt</option>
+      </select>
+      <Button>Submit</Button>
+    </>
+  );
+}
