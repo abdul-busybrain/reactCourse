@@ -1,6 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
+
+# Part 1
 /pizza-menu/node_modules
 /dev-profile-card/node_modules
 /steps/node_modules
@@ -11,6 +13,9 @@
 /tip-calculator/node_modules
 /eat-n-split/node_modules
 /shopping-list-rjs/node_modules
+
+# Part 2
+/use-movie/node_modules
 
 
 /.pnp
