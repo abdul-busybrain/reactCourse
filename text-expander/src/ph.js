@@ -1,5 +1,5 @@
 import "./styles.css";
-import { useState } from "react";
+import TextExpander from "./TextExpander";
 
 export default function App() {
   return (
@@ -35,38 +35,13 @@ export default function App() {
   );
 }
 
-function TextExpander({
-  collapsedNumWords = 10,
-  expandButtonText = "Show more",
-  collapsedButtonText = "Show less",
-  buttonColor = "#1f09cd",
-  expanded = false,
-  className,
-  children,
-}) {
-  const [isExpanded, setIsExpanded] = useState(expanded);
-  const fullText =
-    children.split(" ").slice(0, collapsedNumWords).join(" ") + "...";
-  const displayText = isExpanded ? children : fullText;
-
-  const buttonStyle = {
-    background: "none",
-    border: "none",
-    font: "inherit",
-    cursor: "pointer",
-    marginLeft: "6px",
-    color: buttonColor,
-  };
-
-  return (
-    <div className={className}>
-      <span>{displayText}</span>
-      <button
-        onClick={() => setIsExpanded((expanded) => !expanded)}
-        style={buttonStyle}
-      >
-        {expanded ? collapsedButtonText : expandButtonText}
-      </button>
-    </div>
-  );
-}
+/**
+ Explanation of the implementation:
+We created a new TextExpander component that takes children props (the text to be expanded).
+We use the useState hook to manage the state of whether the text is expanded or not.
+We truncate the text to a specified number of words when not expanded.
+The component renders either the full text or the truncated text based on the expanded state.
+We render a button that toggles the expansion/collapse of the text.
+We pass props like collapsedNumWords, expandButtonText, collapseButtonText, and buttonColor to customize the behavior and appearance of the expander.
+In App.js, we simply wrap the text content with the TextExpander component, passing any desired props.
+This implementation provides a reusable text expander component that can be easily integrated into any React application. The component handles expanding and collapsing text content dynamically based on user interaction. */
