@@ -17,6 +17,7 @@
 # Part 2
 /use-movie/node_modules
 /text-expander/node_modules
+/how-react-works/node_modules
 
 
 /.pnp
