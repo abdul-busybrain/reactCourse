@@ -91,6 +91,7 @@ export default function App() {
       </div>
       {selectedFamily && (
         <FormSplitBill
+          key={selectedFamily.id}
           selectedFamily={selectedFamily}
           onSplitBill={handleSplitBill}
         />
