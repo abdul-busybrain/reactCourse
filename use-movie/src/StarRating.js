@@ -14,28 +14,22 @@ const starContainerStyle = {
 StarRating.propTypes = {
   maxRating: PropTypes.number,
   color: PropTypes.string,
-  size: PropTypes.string,
+  size: PropTypes.number,
   className: PropTypes.string,
   messages: PropTypes.array,
   defaultRating: PropTypes.number,
+  onSetRating: PropTypes.func,
 };
 
 export default function StarRating({
-  maxRating = 3,
-  color = "#2cc419",
-  size = "48",
+  maxRating = 5,
+  color = "#fcc419",
+  size = 48,
   className = "",
   messages = [],
   defaultRating = 0,
   onSetRating,
 }) {
-  const textStyle = {
-    lineHeight: "1",
-    margin: "0",
-    color,
-    fontSize: `${size / 1.5}px`,
-  };
-
   const [rating, setRating] = useState(defaultRating);
   const [tempRating, setTempRating] = useState(0);
 
@@ -43,6 +37,13 @@ export default function StarRating({
     setRating(rating);
     onSetRating(rating);
   }
+
+  const textStyle = {
+    lineHeight: "1",
+    margin: "0",
+    color,
+    fontSize: `${size / 1.5}px`,
+  };
 
   return (
     <div style={containerStyle} className={className}>
@@ -70,9 +71,9 @@ export default function StarRating({
 
 function Star({ onRate, full, onHoverIn, onHoverOut, color, size }) {
   const starStyle = {
-    display: "block",
     width: `${size}px`,
     height: `${size}px`,
+    display: "block",
     cursor: "pointer",
   };
 
