@@ -78,7 +78,11 @@ export default function App() {
         placeholder="Enter amount"
       />
 
-      <select value={fromCurrency} onChange={handleFromCurrencyChange}>
+      <select
+        value={fromCurrency}
+        onChange={handleFromCurrencyChange}
+        disabled={isLoading}
+      >
         {/* NOTE Filter out the currency selected in the 'to' dropdown */}
         {currencies
           .filter((currency) => currency !== toCurrency)
@@ -89,7 +93,11 @@ export default function App() {
           ))}
       </select>
 
-      <select value={toCurrency} onChange={handleToCurrencyChange}>
+      <select
+        value={toCurrency}
+        onChange={handleToCurrencyChange}
+        disabled={isLoading}
+      >
         {/* NOTE Filter out the currency selected in the 'from' dropdown */}
         {currencies
           .filter((currency) => currency !== fromCurrency)
