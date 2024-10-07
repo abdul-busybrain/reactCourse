@@ -1,16 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-StarRating.propTypes = {
-  maxRating: PropTypes.number,
-  color: PropTypes.string,
-  size: PropTypes.number,
-  className: PropTypes.string,
-  messages: PropTypes.array,
-  defaultRating: PropTypes.number,
-  onSetRating: PropTypes.func,
-};
-
 const containerStyle = {
   display: "flex",
   alignItems: "center",
@@ -19,6 +9,16 @@ const containerStyle = {
 
 const starContainerStyle = {
   display: "flex",
+};
+
+StarRating.propTypes = {
+  maxRating: PropTypes.number,
+  color: PropTypes.string,
+  size: PropTypes.number,
+  className: PropTypes.string,
+  messages: PropTypes.array,
+  defaultRating: PropTypes.number,
+  onSetRating: PropTypes.func,
 };
 
 export default function StarRating({
@@ -51,12 +51,12 @@ export default function StarRating({
         {Array.from({ length: maxRating }, (_, i) => (
           <Star
             key={i}
-            size={size}
             full={tempRating ? tempRating >= i + 1 : rating >= i + 1}
-            color={color}
             onRate={() => handleRating(i + 1)}
             onHoverIn={() => setTempRating(i + 1)}
             onHoverOut={() => setTempRating(0)}
+            color={color}
+            size={size}
           />
         ))}
       </div>
@@ -69,12 +69,12 @@ export default function StarRating({
   );
 }
 
-function Star({ size, onRate, color, full, onHoverIn, onHoverOut }) {
+function Star({ onRate, full, onHoverIn, onHoverOut, color, size }) {
   const starStyle = {
     width: `${size}px`,
     height: `${size}px`,
-    cursor: "pointer",
     display: "block",
+    cursor: "pointer",
   };
 
   return (
