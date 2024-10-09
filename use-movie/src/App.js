@@ -49,6 +49,8 @@ const tempWatchedData = [
 
 const API_KEY = "6a5d867c";
 
+const tempQuery = "salah";
+
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
@@ -63,7 +65,7 @@ export default function App() {
       try {
         setIsLoading(true);
         const response =
-          await fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s="salah"
+          await fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${tempQuery}
           `);
         const data = await response.json();
         setMovies(data.Search);
