@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import StarRating from "./StarRating";
 
 const average = (arr) =>
@@ -9,10 +9,15 @@ const API_KEY = "6a5d867c";
 export default function App() {
   const [query, setQuery] = useState("Salah");
   const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
+
+  // const [watched, setWatched] = useState([]);
+  const [watched, setWatched] = useState(function () {
+    const storedValue = localStorage.getItem("watched");
+    return JSON.parse(storedValue);
+  });
 
   function hadleSelectMovie(id) {
     setSelectedId((selectedId) => (id === selectedId ? null : id));
@@ -24,11 +29,20 @@ export default function App() {
 
   function handleAddWatched(movie) {
     setWatched((watched) => [...watched, movie]);
+
+    // localStorage.setItem("watched", JSON.stringify([...watched, movie]));
   }
 
   function handleDeleteWatched(id) {
     setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
   }
+
+  useEffect(
+    function () {
+      localStorage.setItem("watched", JSON.stringify(watched));
+    },
+    [watched]
+  );
 
   useEffect(
     function () {
@@ -155,6 +169,25 @@ function NumResults({ movies }) {
 }
 
 function Search({ query, setQuery }) {
+  const inputEl = useRef(null);
+
+  useEffect(
+    function () {
+      function callback(e) {
+        if (document.activeElement === inputEl.current) return;
+
+        if (e.code === "Enter") {
+          inputEl.current.focus();
+          setQuery("");
+        }
+      }
+
+      document.addEventListener("keydown", callback);
+      return () => document.addEventListener("keydown", callback);
+    },
+    [setQuery]
+  );
+
   return (
     <input
       className="search"
@@ -162,6 +195,7 @@ function Search({ query, setQuery }) {
       placeholder="Search movies..."
       value={query}
       onChange={(e) => setQuery(e.target.value)}
+      ref={inputEl}
     />
   );
 }
@@ -255,8 +289,8 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     Genre: genre,
   } = movie;
 
-  /* eslint-disable*/
-  if (imdbRating > 8) [isTop, setIsTop] = useState(true);
+  // if (imdbRating > 8) [isTop, setIsTop] = useState(true);
+  // if (imdbRating > 8) return <p>Greatest ever</p>;
 
   function handleAdd() {
     const newWatchedMovie = {
