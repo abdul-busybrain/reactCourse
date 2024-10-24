@@ -20,6 +20,10 @@
 /how-react-works/node_modules
 /currency-converter/node_modules
 /my-movie-hub/node_modules
+/geo-location/node_modules
+
+# Part 3
+/react-quiz/node_modules
 
 
 /.pnp
