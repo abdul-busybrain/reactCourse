@@ -24,6 +24,7 @@
 
 # Part 3
 /react-quiz/node_modules
+/bank-app/node_modules
 
 
 /.pnp
