@@ -1,4 +1,4 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./Map.module.css";
 import {
   MapContainer,
@@ -70,7 +70,10 @@ function Map() {
 
 function ChangeCenter({ position }) {
   const map = useMap();
-  map.setView(position);
+  useEffect(() => {
+    if (position[0] !== undefined && position[1] !== undefined)
+      map.setView(position);
+  }, [map, position]);
   return null;
 }
 
