@@ -1,3 +1,16 @@
 {
-  "cities": []
+  "cities": [
+    {
+      "id": "2679",
+      "cityName": "Garko",
+      "country": "Nigeria",
+      "emoji": "🇳🇬",
+      "date": "2024-11-11T09:26:50.415Z",
+      "notes": "",
+      "position": {
+        "lat": "11.682833230644315",
+        "lng": "8.85601043701172"
+      }
+    }
+  ]
 }
