@@ -27,6 +27,8 @@
 /bank-app/node_modules
 /worldwise/node_modules
 /atomic-blog/node_modules
+/workout-timer/node_modules
+/redux-intro/node_modules
 
 
 /.pnp
