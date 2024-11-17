@@ -30,6 +30,9 @@
 /workout-timer/node_modules
 /redux-intro/node_modules
 
+# Part 4
+/shop-fast/node_modules
+
 
 /.pnp
 .pnp.js
