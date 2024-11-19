@@ -4,9 +4,9 @@ import Username from "../features/user/Username";
 
 function Header() {
   return (
-    <header className="py3 sm:px6 flex items-center justify-between border-b border-stone-200 bg-yellow-500 px-4 uppercase">
+    <header className="font-shop flex items-center justify-between border-b border-stone-200 bg-yellow-500 px-4 py-3 uppercase sm:px-6">
       <Link to="/" className="tracking-widest">
-        Shop Fast
+        Shop Fast.
       </Link>
 
       <SearchOrder />
