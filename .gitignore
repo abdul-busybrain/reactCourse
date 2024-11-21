@@ -33,6 +33,7 @@
 # Part 4
 /shop-fast/node_modules
 /order-pizza/node_modules
+/wild-oasis/node_modules
 
 
 /.pnp
